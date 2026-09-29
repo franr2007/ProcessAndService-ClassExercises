@@ -1,0 +1,6 @@
+Al ejecutar el programa se imprime el PID del padre,
+luego con un bufferReader y con un while leo el processo del hijo
+que imprime su PID y un mensaje que indica que esta vivo, luego
+el hijo espera 20 y termina su programa, por usar metodos secuenciales
+el padre no llega a matar al hijo porque el waitfor esta bloqueado por
+el while, entonces no se ejecuta el destroyForcibly()
