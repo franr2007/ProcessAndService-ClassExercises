@@ -1,0 +1,3 @@
+Cuando el padre mata el processo del hijo, el hijo no ha llegado a la parte de imprimir "Senyal SIGALRM rebuda!"
+entonces en todos los casos mientras el hijo mantenga la espera de 10 segundos no llegara a imprimir el mensaje
+porque el padre mata el proceso hijo.
