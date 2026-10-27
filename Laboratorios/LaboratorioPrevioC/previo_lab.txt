@@ -1,0 +1,5 @@
+#Respuestas#
+
+exec1:
+    - veo un programa que recoge el pid de un proceso de 2 formas distintas
+    - el mensaje aparece 2 veces
