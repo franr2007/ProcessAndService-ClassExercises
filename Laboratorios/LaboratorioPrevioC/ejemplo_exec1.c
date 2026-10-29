@@ -14,4 +14,5 @@ execlp("ls", "ls", "-l", (char *) 0);
 sprintf(buffer, "Soy el proceso: %d\n", getpid());
 write(1,buffer,strlen(buffer));
 
+return 0;
 }
