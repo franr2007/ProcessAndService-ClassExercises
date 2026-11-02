@@ -1,5 +1,12 @@
 #Respuestas#
 
 exec1:
-    - veo un programa que recoge el pid de un proceso de 2 formas distintas
-    - el mensaje aparece 2 veces
+    -Este programa hace 2 cosas, nos da el PID del proceso y luego hace un ls, dentro del codigo se intenta imprimir otra cosa pero queda interrumpido (explicacion abajo)
+    -El mensaje del PID se muestra una sola vez
+    -Esto pasa porque la funcion execlp abre un nuevo programa (en este caso ls) pero reemplazandolo por el actual y como ha interrumpido el anterior programa no llega a mostrar el ultimo PID
+
+exec2:
+    -Este programa hace 2 cosas, nos da el PID del proceso y ejecuta otra linea poniendo 'despues del exec', dentro del codigo se intenta utilizar execlp pero falla 
+    a la hora de ejecutar el proceso, haciendo que el programa no quede interrumpido ni reemplazando por otro
+    -Aparecen estos mensajes en pantalla: Soy el proceso: 6577 | Después del exec
+    -Solo se ejecuta un proceso

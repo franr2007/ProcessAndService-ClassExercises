@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 
-main(){
+int main(){
 
 char buffer[80];
 
@@ -14,4 +14,5 @@ execlp("./ejemplo_fork1", "ejemplo_fork1", (char *) 0);
 strcpy(buffer, "Después del exec\n");
 write(1,buffer,strlen(buffer));
 
+return 0;
 }
