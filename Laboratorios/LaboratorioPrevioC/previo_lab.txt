@@ -10,3 +10,35 @@ exec2:
     a la hora de ejecutar el proceso, haciendo que el programa no quede interrumpido ni reemplazando por otro
     -Aparecen estos mensajes en pantalla: Soy el proceso: 6577 | Después del exec
     -Solo se ejecuta un proceso
+
+fork1:
+    -OUTPUT: Soy el proceso 1496 | Soy el proceso 1497
+    -Se muestran 2 procesos porque la funcion fork crea un proceso hijo que ejecuta las mismas lineas de codigo que el del padre
+
+fork2:
+    -OUTPUT: (Antes del fork: Soy el proceso 2478) | PADRE: Soy el proceso 2478 | Los DOS: Soy el proceso 2478 | HIJO: Soy el proceso 2479 | Los DOS: Soy el proceso 2479
+    -Se muestran 5 mensajes, 1 antes del fork y 4 que van alterando mensajes entre uno de ellos o los dos a la vez
+    -Gracias al switch se puede diferenciar quien envia cada mensaje, 0 si es el hijo, -1 si es error y si no es ninguno de los 2 el padre
+
+fork3:
+    -OUTPUT: (Antes del fork: Soy el proceso 5007) | PADRE: Soy el proceso 5007 | (Solo lo ejecuta el padre: Soy el proceso 5007) | HIJO: Soy el proceso 5008
+    -Se muestran 4 mensajes, lo unico que cambia respecto al anterior codigo es que se le añade exit(0) al proceso hijo asi no ejecutando el codigo posterior
+
+fork4:
+    -OUTPUT 1r orden:
+        1.Antes del fork: Soy el proceso 6048
+        2.PADRE: Soy el proceso 6048
+        3.Solo lo ejecuta el padre: Soy el proceso 6048
+        4.HIJO: Soy el proceso 6049
+        5.HIJO acaba: Soy el proceso 6049
+
+    -El proceso padre termina antes que el del hijo
+
+    -Para hacer que el padre espere al hijo se ha utilizado la funcion wait(NULL) y se ha añadido la libreria #include <sys/wait.h>
+
+    -OUTPUT 2n orden:
+        1.Antes del fork: Soy el proceso 7883
+        2.PADRE: Soy el proceso 7883
+        3.HIJO: Soy el proceso 7884
+        4.HIJO acaba: Soy el proceso 7884
+        5.Solo lo ejecuta el padre: Soy el proceso 7883

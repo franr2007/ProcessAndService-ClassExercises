@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/wait.h>
+
 int main(int argc,char *argv[])
 {
 	int pid,i;
@@ -35,7 +37,10 @@ int main(int argc,char *argv[])
 			sprintf(buffer,"PADRE: Soy el proceso %d\n",getpid());
 			write(1, buffer, strlen(buffer));
 
+			wait(NULL);
 	}
+	
+	
 	
 	sprintf(buffer,"Solo lo ejecuta el padre: Soy el proceso %d\n",getpid());
 	write(1, buffer, strlen(buffer));
