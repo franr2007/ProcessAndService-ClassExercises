@@ -37,7 +37,7 @@ int main(int argc,char *argv[])
 			sprintf(buffer,"PADRE: Soy el proceso %d\n",getpid());
 			write(1, buffer, strlen(buffer));
 
-			wait(NULL);
+			waitpid(pid,NULL,0);
 	}
 	
 	

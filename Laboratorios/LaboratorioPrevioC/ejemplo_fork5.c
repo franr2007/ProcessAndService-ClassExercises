@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 char variable_global='A';
 int main(int argc,char *argv[])
@@ -17,6 +18,9 @@ int main(int argc,char *argv[])
 	switch (pid) {/* Esta linea la ejecutan tanto el padre como el hijo */
 
 		case 0: /* Escribe aqui el codigo del proceso hijo */
+			variable_global = 'B';
+        	variable_local = 'b';
+
 			sprintf(buffer,"HIJO: Soy el proceso %d\n",getpid());
 			write(1,buffer,strlen(buffer));
 		
@@ -37,7 +41,7 @@ int main(int argc,char *argv[])
 			sprintf(buffer,"PADRE: Soy el proceso %d\n",getpid());
 			write (1, buffer, strlen(buffer));
 			
-			waitpid(-1, NULL, 0);
+			waitpid(pid,NULL,0);
 			/* Comprobamos que tenemos acceso a las variables */
 			sprintf(buffer,"PADRE:La variable_global vale %c y la local %c\n", 
 		variable_global,variable_local);

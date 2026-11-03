@@ -34,7 +34,7 @@ fork4:
 
     -El proceso padre termina antes que el del hijo
 
-    -Para hacer que el padre espere al hijo se ha utilizado la funcion wait(NULL) y se ha añadido la libreria #include <sys/wait.h>
+    -Para hacer que el padre espere al hijo se ha utilizado la funcion waitpid(pid,NULL,0) y se ha añadido la libreria #include <sys/wait.h>
 
     -OUTPUT 2n orden:
         1.Antes del fork: Soy el proceso 7883
@@ -42,3 +42,37 @@ fork4:
         3.HIJO: Soy el proceso 7884
         4.HIJO acaba: Soy el proceso 7884
         5.Solo lo ejecuta el padre: Soy el proceso 7883
+
+fork5:
+    -OUTPUT 1r:
+        1.Antes del fork: Soy el proceso 1774
+        2.PADRE: Soy el proceso 1774
+        3.HIJO: Soy el proceso 1775
+        4.HIJO:La variable_global vale A y la local a
+        5.PADRE:La variable_global vale A y la local a
+        6.Solo lo ejecuta el padre: Soy el proceso 1774
+
+    -El hijo usa las variables global y local pero solo se modifica dentro del hijo para que sea solo visible para el hijo
+
+    -Para modificar las variables del hijo:
+        variable_global = 'B';
+        variable_local = 'b';
+
+    -OUTPUT 2n:
+        1.Antes del fork: Soy el proceso 1774
+        2.PADRE: Soy el proceso 1774
+        3.HIJO: Soy el proceso 1775
+        4.HIJO:La variable_global vale B y la local b
+        5.PADRE:La variable_global vale A y la local a
+        6.Solo lo ejecuta el padre: Soy el proceso 1774
+
+fork6:
+    -OUTPUT:
+        PADRE:La variable_global vale k (repetidas muchas veces)
+        HIJO:La variable_global vale ... (repetidas muchas veces)
+        Solo lo ejecuta el padre: Soy el proceso 4080
+
+    -El padre y el hijo ejecutan la función Escribe_variable_global() muchas veces, mostrando el valor de la variable_global.
+
+    -No podemos asegurar que el contenido del fichero de salida sea exactamente el mismo en cada ejecucion, porque los procesos padre e hijo se ejecutan concurrentemente
+     y el sistema operativo decide cuando se ejecuta cada uno.

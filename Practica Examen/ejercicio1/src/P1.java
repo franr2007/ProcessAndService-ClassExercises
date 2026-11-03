@@ -1,44 +1,33 @@
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class P1 {
 
     public static void main(String[] args) throws Exception {
-        try (Scanner sc = new Scanner(System.in);) {
-            String entrada;
+        try {
+            Scanner sc= new Scanner(System.in);
+            ProcessBuilder pb = new ProcessBuilder("java","P2");
+            Process proceso = pb.start();
 
-            ProcessBuilder pb = new ProcessBuilder("java", "P2");
-            
+            BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
 
-            Process p = pb.start();
+            System.out.println("Escribe un numero");
+            String numero = sc.next();
 
-            System.out.println("Pon un numero: ");
-            entrada = sc.nextLine();
-
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-            bw.write(entrada);
-            bw.flush();
-            bw.close();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            int resultado = p.waitFor();
+            PrintWriter pw = new PrintWriter(proceso.getOutputStream(), true);
+            pw.write(numero);
+            pw.close();
 
             String linea;
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
+                System.out.println("Salida hijo: "+linea);
             }
 
-            if (resultado == 0) {
-                System.out.println("El programa a terminado correctamente");
-            } else System.out.println("El programa a terminado de forma erronea");
+            proceso.waitFor();
 
-            br.close();
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
