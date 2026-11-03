@@ -1,29 +1,31 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 public class P1 {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         try {
-            Scanner sc= new Scanner(System.in);
-            ProcessBuilder pb = new ProcessBuilder("java","P2");
+            Scanner sc = new Scanner(System.in);
+            ProcessBuilder pb = new ProcessBuilder("java", "P2");
             Process proceso = pb.start();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
 
             System.out.println("Escribe un numero");
             String numero = sc.next();
 
-            PrintWriter pw = new PrintWriter(proceso.getOutputStream(), true);
-            pw.write(numero);
-            pw.close();
+            try (OutputStreamWriter w = new OutputStreamWriter(proceso.getOutputStream())) {
+                w.write(numero);
+                w.flush();
+            }
 
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                System.out.println("Salida hijo: "+linea);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()))) {
+
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    System.out.println("Salida hijo: " + linea);
+                }
             }
 
             proceso.waitFor();
@@ -31,6 +33,8 @@ public class P1 {
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 }

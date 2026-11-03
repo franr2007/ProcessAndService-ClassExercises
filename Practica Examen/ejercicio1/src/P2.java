@@ -9,6 +9,7 @@ public class P2 {
 
             int numero = Integer.parseInt(br.readLine());
 
+            System.out.println("Valor recibido: "+numero);
             System.out.println("Numero multiplicado x2: "+(numero*2));
 
             long pid = ProcessHandle.current().pid();
