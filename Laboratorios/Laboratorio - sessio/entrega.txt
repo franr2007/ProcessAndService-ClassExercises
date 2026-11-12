@@ -2,4 +2,96 @@ Pregunta 1:
 Un proceso puede saber el  pid de sus hijos con el valor que devuelve la funcion fork, 
 la funcion que pueden utilizar los procesos para saber su propio pid es el getpid()
 
+
+
 Pregunta 2:
+El codigo justo despues de la llamada execlp se ejecutara en caso de que el exclp falle
+
+
+
+Pregunta 3:
+Hay diferente tipos de directorios dentro del proceso padre, entre los mas importantes: attr, cwd, exe, fd, fdinfo, status, cmdline, environ y stat.
+
+He usado el comando ls -l para tambien ver que permisos tiene cada uno de estos directorios.
+
+
+
+Pregunta 4:
+**1. Contenido de status:**
+
+El fichero `status` muestra informacion sobre el proceso, como su nombre, su PID, el PID de su padre, el usuario y su estado.
+
+**2. Contenido de cmdline:**
+
+El fichero `cmdline` muestra como hemos iniciado el programa y los parametros que le hemos pasado. En este caso: `./myPS fran`.
+
+**3. Comparacion de environ y env:**
+
+El fichero `environ` muestra las variables que tiene el proceso, mientras que el comando `env` muestra las variables de la terminal.
+
+Al comparar los dos, podemos ver que tienen variables como `PATH` y `PWD`, que indican las rutas y el directorio en el que estamos trabajando.
+
+**4. Estado del proceso:**
+
+El proceso padre se encuentra en estado `R (running)`, es decir, esta en ejecucion.
+
+**5. Tiempo de CPU en modo usuario:**
+
+En el campo 14 del fichero `stat` podemos ver el tiempo que ha utilizado el proceso la CPU en modo usuario.
+
+El valor que he obtenido es `28339` ticks de reloj.
+
+
+
+Pregunta 5:
+El fichero `cwd` apunta al directorio en el que se esta ejecutando el proceso.
+
+El fichero `exe` apunta al ejecutable que esta utilizando el proceso. 
+En este caso apunta a `ps`, porque el proceso hijo ha sustituido el programa original mediante `execlp()`, aparte no se muestra nada porque ya a terminado.
+
+
+
+Pregunta 6:
+
+environ: muestra las variables de entorno que tiene el proceso hijo.
+
+status: muestra informacion del proceso, como su PID, su estado y el usuario.
+
+cmdline: muestra el comando que esta ejecutando el proceso. En este caso, ps -u fran.
+
+El proceso hijo ejecuta el comando ps y termina cuando acaba su ejecucion. Por eso, si intentamos consultar sus ficheros despues, puede que ya no aparezcan en /proc.
+
+
+
+Pregunta 7:
+
+El fichero `cwd` apunta al directorio donde se esta ejecutando el proceso.
+
+El fichero `exe` apunta al ejecutable `myPS_v0`, ya que en esta version el proceso hijo no realiza ninguna mutacion y sigue ejecutando el programa original.
+
+La diferencia con la version anterior es que antes apuntaba a `ps`, porque el hijo habia ejecutado `execlp()`. Esto ocurre porque `execlp()` sustituye el programa que estaba ejecutando el proceso.
+
+
+
+Pregunta 8:
+
+environ: muestra las variables de entorno del proceso hijo.
+
+status: muestra informacion del proceso, como su PID, su estado y el usuario.
+
+cmdline: muestra el comando y los parametros utilizados para iniciar el programa. En este caso, ./myPS_v0 fran.
+
+El proceso hijo se encuentra en estado R (running), porque esta ejecutando el bucle infinito.
+
+La diferencia con la version anterior es que ahora el proceso hijo sigue ejecutando myPS_v0 y no desaparece al ejecutar ps. Esto se debe a que no realiza ninguna mutacion mediante execlp().
+
+
+Pregunta 9:
+
+El proceso padre se encuentra en estado S (sleeping) porque esta esperando a que el usuario pulse una tecla mediante la llamada read().
+
+
+
+Pregunta 10:
+
+He utilizado el operador > para guardar la salida de cada ejecucion en un fichero diferente. Asi puedo comparar los resultados y comprobar que el orden de ejecucion de los procesos puede variar.
