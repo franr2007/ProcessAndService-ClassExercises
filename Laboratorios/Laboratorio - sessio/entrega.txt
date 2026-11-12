@@ -1,0 +1,5 @@
+Pregunta 1:
+Un proceso puede saber el  pid de sus hijos con el valor que devuelve la funcion fork, 
+la funcion que pueden utilizar los procesos para saber su propio pid es el getpid()
+
+Pregunta 2:
